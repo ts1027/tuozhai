@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>鼠标拖拽</title>
+	<style>
+	body,ul,li{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	.box{
+		width: 100%;
+		height: 400px;
+		border:1px solid blue;
+	}
+	.inner{
+		width: 500%;
+		height: 100%;
+	}
+	.inner li{
+		width: 20%;
+		height: 100%;
+		float: left;
+		font-size: 80px;
+		color: #fff;
+		text-align: center;
+		line-height: 400px;
+	}
+	.inner li:nth-child(1){
+		background: #428EF4;
+	}
+	.inner li:nth-child(2){
+		background: #FAF60A;
+	}
+	.inner li:nth-child(3){
+		background: #33D775;
+	}
+	.inner li:nth-child(4){
+		background: #F73514;
+	}
+	.inner li:nth-child(5){
+		background: #D03DF7;
+	}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul class="inner">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</div>
+	<script>
+	 var inner=document.querySelector(".inner");
+	 var li=inner.querySelectorAll("li");
+	 var ws=li[0].offsetWidth;
+	 var i=0;
+	 var moveX=0;
+	 var ist='ontouchstart' in window;
+	 if(ist){
+	 	var mousedown='touchstart';
+		var mousemove='touchmove';
+		var mouseup='touchend';
+	 }
+	 else{
+		var mousedown='mousedown';
+		var mousemove='mousemove';
+		var mouseup='mouseup';
+	}
+	 inner.addEventListener(mousedown,function(e){
+	 	e.preventDefault();
+	 	var stime=e.timeStamp;  //时间戳
+	 	e=ist?e.changedTouches[0]:e;
+	 	
+	 	var dx=e.clientX;
+	 	var mx;
+	 	var lenx;
+	 	var forword;
+	 	var Lt;
+	 	inner.style.transition="none";
+	 	
+	 	function move(e){
+	 		e=ist?e.changedTouches[0]:e;
+	 		mx=e.clientX;
+	 		lenx=mx-dx;
+	 		forword=lenx>0?"right":"left";
+	 		inner.style.transform="translateX("+(lenx+moveX)+"px)";
+	 	}
+	 	function Up(e){
+	 		var etime=e.timeStamp;
+	 		Lt=etime-stime;
+	 		if(Math.abs(lenx)>ws/2 ||(Lt<100 &&Math.abs(lenx)>30)){  
+	 			if(forword=="right"){
+	 				i--;
+	 				if(i<0){i=0}
+	 			}
+	 			if(forword=="left"){
+					i++;
+					if(i>li.length-1){
+						i=li.length-1;
+					}
+	 			} 	
+	 			moveX=-i*ws;
+	 			inner.style.transition="transform .5s";	
+	 			inner.style.transform="translateX("+moveX+"px)";
+	 		}
+	 		else{
+	 			moveX=-i*ws;
+	 			inner.style.transition="transform .5s";
+	 			inner.style.transform="translateX("+moveX+"px)";
+	 		}
+	 		document.removeEventListener("mousemove",move)
+			document.removeEventListener("mouseup",Up)
+	 	}
+	 	document.addEventListener(mousemove,move)
+		document.addEventListener(mouseup,Up)
+	 })
+	</script>
+</body>
+</html>
