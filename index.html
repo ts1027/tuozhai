@@ -117,8 +117,8 @@
 	 			inner.style.transition="transform .5s";
 	 			inner.style.webkitTransform="translate3d("+moveX+"px,0,0)";
 	 		}
-	 		inner.removeEventListener(mousemove,move);
-			inner.removeEventListener(mouseup,Up);
+	 		document.removeEventListener(mousemove,move);
+			document.removeEventListener(mouseup,Up);
 	 	}
 
 	 })
