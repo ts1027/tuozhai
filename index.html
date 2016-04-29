@@ -75,7 +75,8 @@
 	}
 	 inner.addEventListener(mousedown,function(e){
 		 alert(1);
-	 	e.preventDefault();
+	 	var b=e;
+
 	 	var stime=e.timeStamp;  //时间戳
 	 	e=ist?e.changedTouches[0]:e;
 
@@ -120,7 +121,7 @@
 	 		inner.removeEventListener(mousemove,move);
 			inner.removeEventListener(mouseup,Up);
 	 	}
-	 	
+		 b.preventDefault();
 	 })
 	</script>
 </body>
