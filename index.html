@@ -77,14 +77,13 @@
 	 	e.preventDefault();
 	 	var stime=e.timeStamp;  //时间戳
 	 	e=ist?e.changedTouches[0]:e;
-	 	
 	 	var dx=e.clientX;
-	 	var mx;
-	 	var lenx;
+	 	var mx=0;
+	 	var lenx=0;
 	 	var forword;
 	 	var Lt;
 	 	inner.style.transition="none";
-	 	
+	 	inner.addEventListener(mousemove,move);
 	 	function move(e){
 	 		e=ist?e.changedTouches[0]:e;
 	 		mx=e.clientX;
@@ -92,6 +91,7 @@
 	 		forword=lenx>0?"right":"left";
 	 		inner.style.transform="translateX("+(lenx+moveX)+"px)";
 	 	}
+	 	inner.addEventListener(mouseup,Up);
 	 	function Up(e){
 	 		var etime=e.timeStamp;
 	 		Lt=etime-stime;
@@ -115,11 +115,10 @@
 	 			inner.style.transition="transform .5s";
 	 			inner.style.transform="translateX("+moveX+"px)";
 	 		}
-	 		inner.removeEventListener("mousemove",move)
-			inner.removeEventListener("mouseup",Up)
+	 		inner.removeEventListener(mousemove,move);
+			inner.removeEventListener(mouseup,Up);
 	 	}
-	 	inner.addEventListener(mousemove,move)
-		inner.addEventListener(mouseup,Up)
+	 	
 	 })
 	</script>
 </body>
