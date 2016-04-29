@@ -74,10 +74,11 @@
 		var mouseup='mouseup';
 	}
 	 inner.addEventListener(mousedown,function(e){
+		 alert(1);
 	 	e.preventDefault();
 	 	var stime=e.timeStamp;  //时间戳
 	 	e=ist?e.changedTouches[0]:e;
-		 alert(1);
+
 	 	var dx=e.clientX;
 	 	var mx=0;
 	 	var lenx=0;
