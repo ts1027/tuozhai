@@ -74,8 +74,7 @@
 		var mouseup='mouseup';
 	}
 	 inner.addEventListener(mousedown,function(e){
-//		 alert(1);
-	 	var b=e;
+         e.preventDefault();
 
 	 	var stime=e.timeStamp;  //时间戳
 	 	e=ist?e.changedTouches[0]:e;
@@ -96,7 +95,6 @@
 	 	}
 	 	inner.addEventListener(mouseup,Up);
 	 	function Up(e){
-            console.log(1);
 	 		var etime=e.timeStamp;
 	 		Lt=etime-stime;
 	 		if(Math.abs(lenx)>ws/2 ||(Lt<100 &&Math.abs(lenx)>30)){  
@@ -122,7 +120,7 @@
 	 		inner.removeEventListener(mousemove,move);
 			inner.removeEventListener(mouseup,Up);
 	 	}
-		 b.preventDefault();
+
 	 })
 	</script>
 </body>
