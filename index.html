@@ -92,7 +92,7 @@
 	 		mx=e.clientX;
 	 		lenx=mx-dx;
 	 		forword=lenx>0?"right":"left";
-	 		inner.style.webkitTransform="translateX("+(lenx+moveX)+"px)";
+	 		inner.style.webkitTransform="translate3D("+(lenx+moveX)+"px)";
 	 	}
 	 	inner.addEventListener(mouseup,Up);
 	 	function Up(e){
@@ -112,12 +112,12 @@
 	 			} 	
 	 			moveX=-i*ws;
 	 			inner.style.transition="transform .5s";	
-	 			inner.style.webkitTransform="translateX("+moveX+"px)";
+	 			inner.style.webkitTransform="translate3D("+moveX+"px)";
 	 		}
 	 		else{
 	 			moveX=-i*ws;
 	 			inner.style.transition="transform .5s";
-	 			inner.style.webkitTransform="translateX("+moveX+"px)";
+	 			inner.style.webkitTransform="translate3D("+moveX+"px)";
 	 		}
 	 		inner.removeEventListener(mousemove,move);
 			inner.removeEventListener(mouseup,Up);
